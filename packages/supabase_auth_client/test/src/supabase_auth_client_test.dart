@@ -5,19 +5,15 @@ import 'package:mocktail/mocktail.dart';
 import 'package:supabase_auth_client/supabase_auth_client.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class FakeGotrueSessionResponse extends Fake implements GotrueSessionResponse {}
-
 class MockGoTrueClient extends Mock implements GoTrueClient {}
 
 void main() {
   late SupabaseAuthClient supabaseAuthClient;
-  late GotrueSessionResponse gotrueSessionResponse;
   late GoTrueClient goTrueClient;
 
   const email = 'test@test.com';
 
   setUp(() {
-    gotrueSessionResponse = FakeGotrueSessionResponse();
     goTrueClient = MockGoTrueClient();
     supabaseAuthClient = SupabaseAuthClient(
       auth: goTrueClient,
@@ -37,12 +33,12 @@ void main() {
     group('SignIn', () {
       test('with an email completes', () async {
         when(
-          () => goTrueClient.signIn(
+          () => goTrueClient.signInWithOtp(
             email: any(named: 'email'),
-            options: any(named: 'options'),
+            emailRedirectTo: any(named: 'emailRedirectTo'),
           ),
         ).thenAnswer(
-          (_) async => gotrueSessionResponse,
+          (_) async => Future.value(),
         );
 
         expect(
@@ -53,9 +49,9 @@ void main() {
 
       test('with an email throw SupabaseSignInFailure', () async {
         when(
-          () => goTrueClient.signIn(
+          () => goTrueClient.signInWithOtp(
             email: any(named: 'email'),
-            options: any(named: 'options'),
+            emailRedirectTo: any(named: 'emailRedirectTo'),
           ),
         ).thenThrow(Exception('oops'));
 
@@ -69,7 +65,7 @@ void main() {
     group('SignOut', () {
       test('on completes', () async {
         when(() => goTrueClient.signOut()).thenAnswer(
-          (_) async => gotrueSessionResponse,
+          (_) async {},
         );
         await supabaseAuthClient.signOut();
         expect(

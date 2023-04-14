@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:very_good_supabase/account/account.dart';
-import 'package:very_good_supabase/auth_states_supabase/auth.dart';
 import 'package:very_good_supabase/gen/gen.dart';
 import 'package:very_good_supabase/utils/utils.dart';
 
@@ -13,7 +12,7 @@ class AccountView extends StatefulWidget {
   AccountViewState createState() => AccountViewState();
 }
 
-class AccountViewState extends AuthRequiredState<AccountView> {
+class AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +73,7 @@ class _Header extends StatelessWidget {
           padding: const EdgeInsets.only(top: 100),
           child: Text(
             'Update your information 🦄',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

@@ -16,6 +16,9 @@ class UserRepository {
   final SupabaseAuthClient _authClient;
   final SupabaseDatabaseClient _databaseClient;
 
+  /// Stream of the current authentication status
+  Stream<bool> get isAuthenticated => _authClient.isAuthenticated;
+
   /// Method to access the current user.
   Future<User> getUser() async {
     final supabaseUser = await _databaseClient.getUserProfile();

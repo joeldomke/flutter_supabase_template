@@ -11,12 +11,12 @@ class MockGoTrueClient extends Mock implements GoTrueClient {}
 class MockSupabaseQueryBuilder extends Mock implements SupabaseQueryBuilder {}
 
 class MockPostgrestFilterBuilder extends Mock
-    implements PostgrestFilterBuilder {}
+    implements PostgrestFilterBuilder<dynamic> {}
 
 class MockPostgrestTransformBuilder extends Mock
     implements PostgrestTransformBuilder<dynamic> {}
 
-class MockPostgrestBuilder extends Mock implements PostgrestBuilder<dynamic> {}
+class MockPostgrestBuilder extends Mock implements PostgrestFilterBuilder<dynamic> {}
 
 class FakeUser extends Fake implements User {
   @override
@@ -54,10 +54,10 @@ void main() {
   late SupabaseDatabaseClient supabaseDatabaseClient;
   late SupabaseQueryBuilder supabaseQueryBuilder;
   late SupabaseQueryBuilder updateSupabaseQueryBuilder;
-  late PostgrestFilterBuilder selectPostgrestFilterBuilder;
-  late PostgrestFilterBuilder eqPostgrestFilterBuilder;
+  late PostgrestFilterBuilder<dynamic> selectPostgrestFilterBuilder;
+  late PostgrestFilterBuilder<dynamic> eqPostgrestFilterBuilder;
   late PostgrestTransformBuilder<dynamic> postgrestTransformBuilder;
-  late PostgrestBuilder<dynamic> upsertPostgrestBuilder;
+  late PostgrestFilterBuilder<dynamic> upsertPostgrestFilterBuilder;
   late User user;
 
   setUp(() {
@@ -70,7 +70,7 @@ void main() {
     eqPostgrestFilterBuilder = MockPostgrestFilterBuilder();
     postgrestTransformBuilder = MockPostgrestTransformBuilder();
     user = FakeUser();
-    upsertPostgrestBuilder = MockPostgrestBuilder();
+    upsertPostgrestFilterBuilder = MockPostgrestBuilder();
     updatePostgrestResponse = FakeUpdatePostgrestResponse();
 
     when(() => supabaseClient.auth).thenReturn(goTrueClient);
@@ -93,7 +93,7 @@ void main() {
   group('GetUserProfile', () {
     setUp(() {
       when(() => supabaseClient.from(tableName))
-          .thenReturn(supabaseQueryBuilder);
+          .thenAnswer((_) => supabaseQueryBuilder);
 
       when(() => supabaseQueryBuilder.select())
           .thenAnswer((_) => selectPostgrestFilterBuilder);
@@ -139,11 +139,11 @@ void main() {
 
     test('completes', () {
       when(() => supabaseClient.from(tableName))
-          .thenReturn(updateSupabaseQueryBuilder);
+          .thenAnswer((_) => updateSupabaseQueryBuilder);
       when(
         () => updateSupabaseQueryBuilder.upsert(any<dynamic>()),
-      ).thenReturn(upsertPostgrestBuilder);
-      when(() => upsertPostgrestBuilder.execute()).thenAnswer(
+      ).thenAnswer((_) => upsertPostgrestFilterBuilder);
+      when(() => upsertPostgrestFilterBuilder.execute()).thenAnswer(
         (_) async => updatePostgrestResponse,
       );
 
@@ -157,7 +157,7 @@ void main() {
 
     test('throw an SupabaseUpdateUserFailure error', () async {
       when(() => supabaseClient.from(tableName))
-          .thenReturn(supabaseQueryBuilder);
+          .thenAnswer((_) => supabaseQueryBuilder);
       when(() => supabaseQueryBuilder.upsert(any<dynamic>()))
           .thenThrow(Exception('oops'));
 

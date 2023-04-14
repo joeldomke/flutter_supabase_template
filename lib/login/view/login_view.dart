@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:very_good_supabase/auth_states_supabase/auth.dart';
 import 'package:very_good_supabase/gen/assets.gen.dart';
 import 'package:very_good_supabase/login/login.dart';
 
@@ -14,7 +13,7 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends AuthStateSupabase<LoginView> {
+class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -62,7 +61,7 @@ class _Header extends StatelessWidget {
           padding: const EdgeInsets.only(top: 100),
           child: Text(
             'Sign in via the magic link',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

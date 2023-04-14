@@ -11,9 +11,9 @@ part 'supabase_user.g.dart';
 class SupabaseUser extends Equatable {
   /// {@macro supabase_user}
   const SupabaseUser({
-    String? id,
     required this.userName,
     required this.companyName,
+    String? id,
   }) : id = id ?? '';
 
   /// Connect the generated [_$SupabaseUserFromJson] function to the `fromJson`

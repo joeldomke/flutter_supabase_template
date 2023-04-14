@@ -8,10 +8,11 @@ environment:
 dependencies:
   flutter_test:
     sdk: flutter
-  supabase_flutter: ^0.3.1
+  rxdart: ^0.27.7
+  supabase_flutter: ^1.7.0
 
 dev_dependencies:
   flutter:
     sdk: flutter
   mocktail: ^0.3.0
-  very_good_analysis: ^3.0.1
+  very_good_analysis: ^4.0.0+1

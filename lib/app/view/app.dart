@@ -11,7 +11,7 @@ import 'package:user_repository/user_repository.dart';
 import 'package:very_good_supabase/app/app.dart';
 
 class App extends StatelessWidget {
-  const App({super.key, required this.userRepository});
+  const App({required this.userRepository, super.key});
 
   final UserRepository userRepository;
 
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
     return RepositoryProvider.value(
       value: userRepository,
       child: BlocProvider(
-        create: (context) => AppBloc(),
+        create: (context) => AppBloc(userRepository),
         child: const AppView(),
       ),
     );

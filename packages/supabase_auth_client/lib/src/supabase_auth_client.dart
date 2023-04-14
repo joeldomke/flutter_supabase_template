@@ -1,3 +1,5 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// {@template supabase_auth_exception}
@@ -38,18 +40,27 @@ class SupabaseAuthClient {
 
   final GoTrueClient _auth;
 
+  /// Stream of the current auth state
+  Stream<bool> get isAuthenticated =>
+      _auth.onAuthStateChange.map((authStateChange) {
+        switch (authStateChange.event) {
+          case AuthChangeEvent.signedOut:
+            return false;
+          case AuthChangeEvent.signedIn:
+            return true;
+        }
+      }).whereNotNull();
+
   /// Method to do sign in on Supabase.
   Future<void> signIn({
     required String email,
     required bool isWeb,
   }) async {
     try {
-      await _auth.signIn(
+      await _auth.signInWithOtp(
         email: email,
-        options: AuthOptions(
-          redirectTo:
-              isWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
-        ),
+        emailRedirectTo:
+            isWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
       );
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(SupabaseSignInFailure(error), stackTrace);
