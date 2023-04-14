@@ -5,6 +5,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'dart:async';
+
 import 'package:flutter_supabase_template/app/app.dart';
 // ignore_for_file: prefer_const_constructors
 
@@ -18,6 +20,7 @@ class MockUserRepository extends Mock implements UserRepository {}
 
 void main() {
   late UserRepository userRepository;
+  late StreamController<bool> isAuthenticatedStreamController;
 
   group('App', () {
     setUpAll(() async {
@@ -26,6 +29,10 @@ void main() {
 
     setUp(() async {
       userRepository = MockUserRepository();
+      isAuthenticatedStreamController = StreamController();
+      when(
+            () => userRepository.isAuthenticated,
+      ).thenAnswer((_) => isAuthenticatedStreamController.stream);
     });
 
     testWidgets('renders AppView', (tester) async {
