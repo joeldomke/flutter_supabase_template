@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
+import 'package:flutter_supabase_template/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:very_good_supabase/app/app.dart';
 
 void main() {
   group('AppState', () {

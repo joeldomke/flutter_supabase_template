@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_supabase_template/account/account.dart';
+import 'package:flutter_supabase_template/app/app.dart';
+import 'package:flutter_supabase_template/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:very_good_supabase/account/account.dart';
-import 'package:very_good_supabase/app/app.dart';
-import 'package:very_good_supabase/login/login.dart';
 
 import '../../helpers/helpers.dart';
 

@@ -4,11 +4,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:email_launcher/email_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_supabase_template/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:very_good_supabase/login/login.dart';
 
 import '../../helpers/helpers.dart';
 

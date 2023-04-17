@@ -9,12 +9,12 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_supabase_template/app/app.dart';
+import 'package:flutter_supabase_template/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/app/app.dart';
-import 'package:very_good_supabase/l10n/l10n.dart';
 
 class MockUserRepository extends Mock implements UserRepository {}
 

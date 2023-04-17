@@ -2,9 +2,9 @@ import 'package:email_launcher/email_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_supabase_template/gen/assets.gen.dart';
+import 'package:flutter_supabase_template/login/login.dart';
 import 'package:formz/formz.dart';
-import 'package:very_good_supabase/gen/assets.gen.dart';
-import 'package:very_good_supabase/login/login.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

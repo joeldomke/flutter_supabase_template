@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_supabase_template/account/account.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/account/account.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});

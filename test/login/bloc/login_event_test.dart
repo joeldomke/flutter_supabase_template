@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:flutter_supabase_template/login/bloc/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:very_good_supabase/login/bloc/login_bloc.dart';
 
 void main() {
   const email = 'test@gmail.com';

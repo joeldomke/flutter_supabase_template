@@ -5,12 +5,12 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:flutter_supabase_template/app/app.dart';
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/app/app.dart';
 
 import '../../helpers/helpers.dart';
 

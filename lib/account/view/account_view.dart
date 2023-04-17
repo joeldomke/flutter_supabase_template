@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_supabase_template/account/account.dart';
+import 'package:flutter_supabase_template/gen/gen.dart';
+import 'package:flutter_supabase_template/utils/utils.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/account/account.dart';
-import 'package:very_good_supabase/gen/gen.dart';
-import 'package:very_good_supabase/utils/utils.dart';
 
 class AccountView extends StatefulWidget {
   const AccountView({super.key});

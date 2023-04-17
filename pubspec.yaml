@@ -1,4 +1,4 @@
-name: very_good_supabase
+name: flutter_supabase_template
 description: Example of a flutter application to use Very Good CLI and Supabase
 version: 1.0.0+1
 publish_to: none

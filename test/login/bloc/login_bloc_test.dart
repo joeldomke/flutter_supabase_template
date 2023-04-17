@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_supabase_template/login/bloc/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/login/bloc/login_bloc.dart';
 
 class MockUserRepository extends Mock implements UserRepository {}
 

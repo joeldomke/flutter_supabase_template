@@ -7,8 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_supabase_template/app/bloc/app_bloc.dart';
+import 'package:flutter_supabase_template/app/view/app_view.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/app/app.dart';
 
 class App extends StatelessWidget {
   const App({required this.userRepository, super.key});

@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_supabase_template/account/account.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:very_good_supabase/account/account.dart';
 
 import '../../helpers/helpers.dart';
 

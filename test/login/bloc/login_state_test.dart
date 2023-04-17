@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:flutter_supabase_template/login/bloc/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
-import 'package:very_good_supabase/login/bloc/login_bloc.dart';
 
 void main() {
   const email = Email.dirty('email');

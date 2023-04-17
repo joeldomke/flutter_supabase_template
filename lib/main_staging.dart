@@ -7,12 +7,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_supabase_template/app/app.dart';
+import 'package:flutter_supabase_template/bootstrap.dart';
 import 'package:supabase_auth_client/supabase_auth_client.dart';
 import 'package:supabase_database_client/supabase_database_client.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:user_repository/user_repository.dart';
-import 'package:very_good_supabase/app/app.dart';
-import 'package:very_good_supabase/bootstrap.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
