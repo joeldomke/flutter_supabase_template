@@ -17,9 +17,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     _authSubscription = _userRepository.isAuthenticated.listen((isAuthenticated) {
       if (isAuthenticated) {
-            add(const AppAuthenticated());
+        add(const AppAuthenticated());
       } else {
-            add(AppUnauthenticated());
+        add(AppUnauthenticated());
       }
     });
   }

@@ -17,11 +17,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appBloc = AppBloc(userRepository);
     return RepositoryProvider.value(
       value: userRepository,
       child: BlocProvider(
-        create: (context) => AppBloc(userRepository),
-        child: const AppView(),
+        create: (context) => appBloc,
+        child: AppView(appBloc: appBloc),
       ),
     );
   }

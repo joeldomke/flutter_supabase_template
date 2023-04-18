@@ -29,7 +29,9 @@ void main() {
       when(() => appBloc.state).thenReturn(AppState());
 
       await tester.pumpApp(
-        AppView(),
+        AppView(
+          appBloc: appBloc,
+        ),
         appBloc: appBloc,
       );
       expect(find.byType(LoginPage), findsOneWidget);
@@ -41,7 +43,9 @@ void main() {
       );
 
       await tester.pumpApp(
-        const AppView(),
+        AppView(
+          appBloc: appBloc,
+        ),
         appBloc: appBloc,
       );
       expect(find.byType(AccountPage), findsOneWidget);
