@@ -1,4 +1,4 @@
-# Supabase Example
+# Supabase Template
 
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
@@ -154,7 +154,54 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 }
 ```
 
+---
+
+## Working with images and SVGs 🖼
+
+We use the code generator [flutter_gen][flutter_gen_link] in order to access without having to rely on strings.
+
+### Setup
+
+Install flutter_gen
+```sh
+dart pub global activate flutter_gen
+```
+
+### Adding assets
+
+1. Add the asset in `assets`.
+```
+├── assets
+│   ├── images
+│   │   ├── example1.png
+│   │   └── example2.png
+```
+2. Add the path of the asset directory to `pubspect.yaml`.
+```yaml 
+flutter:
+  assets:
+    - assets/images
+```
+3. Run the generator
+  ```sh
+  flutter pub run build_runner build
+  ```
+
+### Accessing assets  
+
+```dart
+import 'package:flutter_supabase_template/gen/assets.gen.dart';
+
+@override
+Widget build(BuildContext context) {
+    return Assets.images.example1.image();
+    // or
+    return Assets.images.example2.svg();
+}
+```
+
 [coverage_badge]: coverage_badge.svg
+[flutter_gen_link]: https://pub.dev/packages/flutter_gen
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg

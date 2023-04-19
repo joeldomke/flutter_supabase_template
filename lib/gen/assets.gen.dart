@@ -5,26 +5,17 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/supabase.png
-  AssetGenImage get supabase =>
-      const AssetGenImage('assets/images/supabase.png');
-
-  /// File path: assets/images/vgv.png
-  AssetGenImage get vgv => const AssetGenImage('assets/images/vgv.png');
-}
 
 class Assets {
   Assets._();
 
   static const String env = 'assets/.env';
-  static const $AssetsImagesGen images = $AssetsImagesGen();
+
+  /// List of all assets
+  List<String> get values => [env];
 }
 
 class AssetGenImage {
@@ -39,7 +30,7 @@ class AssetGenImage {
     ImageErrorWidgetBuilder? errorBuilder,
     String? semanticLabel,
     bool excludeFromSemantics = false,
-    double? scale = 1.0,
+    double? scale,
     double? width,
     double? height,
     Color? color,
@@ -85,5 +76,18 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }

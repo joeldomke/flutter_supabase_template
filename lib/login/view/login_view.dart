@@ -2,7 +2,6 @@ import 'package:email_launcher/email_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_supabase_template/gen/assets.gen.dart';
 import 'package:flutter_supabase_template/login/login.dart';
 import 'package:formz/formz.dart';
 
@@ -38,35 +37,13 @@ class _Header extends StatelessWidget {
   const _Header();
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      key: const Key('loginView_header'),
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox.square(
-              dimension: 100,
-              child: Assets.images.supabase.image(),
-            ),
-            SizedBox(
-              width: 200,
-              height: 100,
-              child: Assets.images.vgv.image(),
-            ),
-          ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 100),
+        child: Text(
+          'Sign in via the magic link',
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Text(
-            'Sign in via the magic link',
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-        ),
-      ],
-    );
-  }
+      );
 }
 
 class _EmailInput extends StatelessWidget {
