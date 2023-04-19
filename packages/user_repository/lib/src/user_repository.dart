@@ -30,9 +30,33 @@ class UserRepository {
     return _databaseClient.updateUser(user: user.toSupabaseUser());
   }
 
+  /// Method to do signUp with email
+  Future<void> signUpWithPassword({
+    required String email,
+    required String password,
+    required bool isWeb,
+  }) async {
+    return _authClient.signUpWithPassword(
+      email: email,
+      password: password,
+      isWeb: isWeb,
+    );
+  }
+
+  /// Method to do signIn with email
+  Future<void> signInWithPassword({
+    required String email,
+    required String password,
+  }) async {
+    return _authClient.signInWithPassword(
+      email: email,
+      password: password,
+    );
+  }
+
   /// Method to do signIn.
-  Future<void> signIn({required String email, required bool isWeb}) async {
-    return _authClient.signIn(email: email, isWeb: isWeb);
+  Future<void> signInWithOtp({required String email, required bool isWeb}) async {
+    return _authClient.signInWithOtp(email: email, isWeb: isWeb);
   }
 
   /// Method to do signOut.

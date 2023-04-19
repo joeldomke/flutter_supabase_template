@@ -42,7 +42,7 @@ void main() {
         );
 
         expect(
-          supabaseAuthClient.signIn(email: email, isWeb: false),
+          supabaseAuthClient.signInWithOtp(email: email, isWeb: false),
           completes,
         );
       });
@@ -56,7 +56,7 @@ void main() {
         ).thenThrow(Exception('oops'));
 
         expect(
-          supabaseAuthClient.signIn(email: email, isWeb: false),
+          supabaseAuthClient.signInWithOtp(email: email, isWeb: false),
           throwsA(isA<SupabaseSignInFailure>()),
         );
       });

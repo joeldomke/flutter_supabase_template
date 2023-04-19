@@ -13,6 +13,14 @@ abstract class SupabaseAuthException implements Exception {
   final Object error;
 }
 
+/// {@template supabase_sign_up_failure}
+/// Thrown during the sign up process if a failure occurs.
+/// {@endtemplate}
+class SupabaseSignUpFailure extends SupabaseAuthException {
+  /// {@macro supabase_sign_up_failure}
+  const SupabaseSignUpFailure(super.error);
+}
+
 /// {@template supabase_sign_in_failure}
 /// Thrown during the sign in process if a failure occurs.
 /// {@endtemplate}
@@ -51,8 +59,38 @@ class SupabaseAuthClient {
         }
       }).whereNotNull();
 
+  /// Method to do sign up using email and password on supabase
+  Future<void> signUpWithPassword({
+    required String email,
+    required String password,
+    required bool isWeb,
+  }) async {
+    try {
+      await _auth.signUp(
+        email: email,
+        password: password,
+        emailRedirectTo:
+            isWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
+      );
+    } on AuthException catch (error, stackTrace) {
+      Error.throwWithStackTrace(SupabaseSignUpFailure(error), stackTrace);
+    }
+  }
+
+  /// Method to do sign in using email and password on supabase
+  Future<void> signInWithPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _auth.signInWithPassword(email: email, password: password);
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(SupabaseSignInFailure(error), stackTrace);
+    }
+  }
+
   /// Method to do sign in on Supabase.
-  Future<void> signIn({
+  Future<void> signInWithOtp({
     required String email,
     required bool isWeb,
   }) async {

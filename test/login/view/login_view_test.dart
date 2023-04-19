@@ -24,6 +24,7 @@ void main() {
 
   const emailInputKey = Key('loginView_emailInput_textField');
   const testEmail = 'test@gmail.com';
+  const testPassword = '123123123';
 
   late LoginBloc loginBloc;
 
@@ -68,7 +69,12 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => loginBloc.add(LoginSubmitted(email: testEmail, isWeb: false)),
+        () => loginBloc.add(
+          LoginSubmitted(
+            email: testEmail,
+            password: testPassword,
+          ),
+        ),
       ).called(1);
     });
   });

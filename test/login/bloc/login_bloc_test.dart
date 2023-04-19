@@ -17,6 +17,9 @@ void main() {
   const validEmailString = 'test@gmail.com';
   const validEmail = Email.dirty(validEmailString);
 
+  const validPasswordString = '123123123';
+  const validPassword = Password.dirty(validPasswordString);
+
   group('LoginBloc', () {
     late UserRepository userRepository;
 
@@ -54,12 +57,16 @@ void main() {
         'when sign in succeeds',
         setUp: () {
           when(
-            () => userRepository.signIn(email: validEmailString, isWeb: false),
+            () => userRepository.signInWithOtp(
+                email: validEmailString, isWeb: false),
           ).thenAnswer((_) async {});
         },
         build: () => LoginBloc(userRepository),
         act: (bloc) => bloc.add(
-          LoginSubmitted(email: validEmailString, isWeb: false),
+          LoginSubmitted(
+            email: validEmailString,
+            password: validPasswordString,
+          ),
         ),
         expect: () => <LoginState>[
           LoginState(status: FormzSubmissionStatus.inProgress),
@@ -72,12 +79,16 @@ void main() {
         'when sign in fails',
         setUp: () {
           when(
-            () => userRepository.signIn(email: validEmailString, isWeb: false),
+            () => userRepository.signInWithOtp(
+                email: validEmailString, isWeb: false),
           ).thenThrow(Exception());
         },
         build: () => LoginBloc(userRepository),
         act: (bloc) => bloc.add(
-          LoginSubmitted(email: validEmailString, isWeb: false),
+          LoginSubmitted(
+            email: validEmailString,
+            password: validPasswordString,
+          ),
         ),
         expect: () => <LoginState>[
           LoginState(status: FormzSubmissionStatus.inProgress),

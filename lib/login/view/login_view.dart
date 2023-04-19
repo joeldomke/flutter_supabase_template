@@ -1,20 +1,18 @@
 import 'package:email_launcher/email_launcher.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_supabase_template/login/login.dart';
+import 'package:flutter_supabase_template/login/view/landing_form.dart';
+import 'package:flutter_supabase_template/login/view/login_form.dart';
+import 'package:flutter_supabase_template/login/view/signup_form.dart';
 import 'package:formz/formz.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  @override
   Widget build(BuildContext context) {
+    final state = context.watch<LoginBloc>().state;
     return ListView(
       padding: const EdgeInsets.symmetric(
         vertical: 50,
@@ -23,13 +21,20 @@ class _LoginViewState extends State<LoginView> {
       children: [
         const _Header(),
         const SizedBox(height: 18),
-        const _EmailInput(),
-        const SizedBox(height: 28),
-        const _SendEmailButton(),
-        const SizedBox(height: 28),
-        if (!kIsWeb) OpenEmailButton()
+        _buildForm(state.loginScreen)
       ],
     );
+  }
+
+  Widget _buildForm(LoginScreen loginScreen) {
+    switch (loginScreen) {
+      case LoginScreen.landingPage:
+        return const LandingForm();
+      case LoginScreen.signIn:
+        return const LoginForm();
+      case LoginScreen.signUp:
+        return const SignupForm();
+    }
   }
 }
 
@@ -37,55 +42,27 @@ class _Header extends StatelessWidget {
   const _Header();
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: Text(
-          'Sign in via the magic link',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      );
-}
-
-class _EmailInput extends StatelessWidget {
-  const _EmailInput();
-
-  @override
-  Widget build(BuildContext context) {
-    final isInProgress = context.select(
-      (LoginBloc bloc) => bloc.state.status == FormzSubmissionStatus.inProgress,
-    );
-    return TextFormField(
-      key: const Key('loginView_emailInput_textField'),
-      readOnly: isInProgress,
-      onChanged: (email) {
-        context.read<LoginBloc>().add(LoginEmailChanged(email));
-      },
-      decoration: const InputDecoration(labelText: 'Email'),
-    );
-  }
-}
-
-class _SendEmailButton extends StatelessWidget {
-  const _SendEmailButton();
-
-  @override
   Widget build(BuildContext context) {
     final state = context.watch<LoginBloc>().state;
 
-    return ElevatedButton(
-      key: const Key('loginView_sendEmail_button'),
-      onPressed: state.status.isInProgress || !state.valid
-          ? null
-          : () => context.read<LoginBloc>().add(
-                LoginSubmitted(
-                  email: state.email.value,
-                  isWeb: kIsWeb,
-                ),
-              ),
-      child: Text(
-        state.status.isInProgress ? 'Loading' : 'Send Magic Link',
-      ),
-    );
+    return Padding(
+        padding: const EdgeInsets.only(top: 100),
+        child: Text(
+          _getHeaderText(state),
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      );
+  }
+
+  String _getHeaderText(LoginState state) {
+    switch (state.loginScreen) {
+      case LoginScreen.landingPage:
+        return 'Welcome!';
+      case LoginScreen.signIn:
+        return 'Welcome back!';
+      case LoginScreen.signUp:
+        return 'Sign Up';
+    }
   }
 }
 

@@ -68,11 +68,11 @@ void main() {
     group('signIn', () {
       test('with email completes', () async {
         when(
-          () => authClient.signIn(email: email, isWeb: false),
+          () => authClient.signInWithOtp(email: email, isWeb: false),
         ).thenAnswer((_) async {});
 
         expect(
-          userRepository.signIn(email: email, isWeb: false),
+          userRepository.signInWithOtp(email: email, isWeb: false),
           completes,
         );
       });

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   const email = 'test@gmail.com';
+  const password = '123123123';
 
   group('LoginEvent', () {
     test('supports value comparisons', () {
@@ -29,8 +30,8 @@ void main() {
     group('LoginSubmitted', () {
       test('supports value comparisons', () {
         expect(
-          LoginSubmitted(email: email, isWeb: false),
-          LoginSubmitted(email: email, isWeb: false),
+          LoginSubmitted(email: email, password: password),
+          LoginSubmitted(email: email, password: password),
         );
       });
     });
