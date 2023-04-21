@@ -26,7 +26,7 @@ void main() async {
 
   await bootstrap(() {
     final authClient = SupabaseAuthClient(
-      auth: Supabase.instance.client.auth,
+      supabaseClient: Supabase.instance.client,
     );
     final databaseClient = SupabaseDatabaseClient(
       supabaseClient: Supabase.instance.client,

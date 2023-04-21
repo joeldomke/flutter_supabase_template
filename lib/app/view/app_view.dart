@@ -36,6 +36,7 @@ class _AppViewState extends State<AppView> {
         }
         return null;
       },
+      // TODO(joeldomke): should listen to UserRepository.isAuthenticated
       refreshListenable: GoRouterRefreshStream(widget.appBloc.stream),
       debugLogDiagnostics: true,
     );

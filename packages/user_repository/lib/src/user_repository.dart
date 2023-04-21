@@ -55,12 +55,19 @@ class UserRepository {
   }
 
   /// Method to do signIn.
-  Future<void> signInWithOtp({required String email, required bool isWeb}) async {
+  Future<void> signInWithOtp({
+    required String email,
+    required bool isWeb,
+  }) async {
     return _authClient.signInWithOtp(email: email, isWeb: isWeb);
   }
 
   /// Method to do signOut.
   Future<void> signOut() async => _authClient.signOut();
+
+  /// Method to check whether email is already used by an account
+  Future<bool> checkIfEmailIsUsed(String email) async =>
+      _authClient.checkIfEmailIsUsed(email);
 }
 
 extension on SupabaseUser {

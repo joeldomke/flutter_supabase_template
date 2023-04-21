@@ -58,7 +58,9 @@ void main() {
         setUp: () {
           when(
             () => userRepository.signInWithOtp(
-                email: validEmailString, isWeb: false),
+              email: validEmailString,
+              isWeb: false,
+            ),
           ).thenAnswer((_) async {});
         },
         build: () => LoginBloc(userRepository),
@@ -80,7 +82,9 @@ void main() {
         setUp: () {
           when(
             () => userRepository.signInWithOtp(
-                email: validEmailString, isWeb: false),
+              email: validEmailString,
+              isWeb: false,
+            ),
           ).thenThrow(Exception());
         },
         build: () => LoginBloc(userRepository),

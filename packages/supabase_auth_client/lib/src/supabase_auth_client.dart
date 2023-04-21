@@ -43,10 +43,12 @@ class SupabaseSignOutFailure extends SupabaseAuthException {
 class SupabaseAuthClient {
   /// {@macro supabase_auth_client}
   SupabaseAuthClient({
-    required GoTrueClient auth,
-  }) : _auth = auth;
+    required SupabaseClient supabaseClient,
+  })  : _auth = supabaseClient.auth,
+        _supabaseClient = supabaseClient;
 
   final GoTrueClient _auth;
+  final SupabaseClient _supabaseClient;
 
   /// Stream of the current auth state
   Stream<bool> get isAuthenticated =>
@@ -111,6 +113,22 @@ class SupabaseAuthClient {
       await _auth.signOut();
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(SupabaseSignOutFailure(error), stackTrace);
+    }
+  }
+
+  /// Method to check whether email is already used by an account
+  Future<bool> checkIfEmailIsUsed(String email) async {
+    try {
+      final doesEmailExist = await _supabaseClient.rpc(
+        'does_email_exist',
+        params: {'email': email},
+      );
+      if (doesEmailExist is bool) {
+        return doesEmailExist;
+      }
+      return false;
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
     }
   }
 }

@@ -7,16 +7,21 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MockGoTrueClient extends Mock implements GoTrueClient {}
 
+class MockSupabaseClient extends Mock implements SupabaseClient {}
+
 void main() {
   late SupabaseAuthClient supabaseAuthClient;
+  late SupabaseClient supabaseClient;
   late GoTrueClient goTrueClient;
 
   const email = 'test@test.com';
 
   setUp(() {
+    supabaseClient = MockSupabaseClient();
     goTrueClient = MockGoTrueClient();
+    when(() => supabaseClient.auth).thenReturn(goTrueClient);
     supabaseAuthClient = SupabaseAuthClient(
-      auth: goTrueClient,
+      supabaseClient: supabaseClient,
     );
   });
 
@@ -24,7 +29,7 @@ void main() {
     test('can be instantiated', () {
       expect(
         SupabaseAuthClient(
-          auth: goTrueClient,
+          supabaseClient: supabaseClient,
         ),
         isNotNull,
       );

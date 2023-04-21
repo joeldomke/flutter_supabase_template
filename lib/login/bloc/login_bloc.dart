@@ -28,8 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     try {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-      // TODO: check whether user already exists
-      const exists = true;
+      final exists = await _userRepository.checkIfEmailIsUsed(event.email);
       if (exists) {
         emit(
           state.copyWith(
@@ -57,11 +56,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     NavigatedBackToLandingPage event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(
-      valid: true,
-      password: const Password.pure(),
-      loginScreen: LoginScreen.landingPage,
-    ));
+    emit(
+      state.copyWith(
+        valid: true,
+        password: const Password.pure(),
+        loginScreen: LoginScreen.landingPage,
+      ),
+    );
   }
 
   void _onEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
