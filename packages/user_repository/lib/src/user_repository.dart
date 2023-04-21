@@ -20,9 +20,9 @@ class UserRepository {
   Stream<bool> get isAuthenticated => _authClient.isAuthenticated;
 
   /// Method to access the current user.
-  Future<User> getUser() async {
+  Future<User?> getUser() async {
     final supabaseUser = await _databaseClient.getUserProfile();
-    return supabaseUser.toUser();
+    return supabaseUser?.toUser();
   }
 
   /// Method to update user information on profiles database.

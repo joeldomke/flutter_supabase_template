@@ -41,17 +41,18 @@ class SupabaseDatabaseClient {
 
   /// Method to get the user information by id
   /// from the profiles database on Supabase.
-  Future<SupabaseUser> getUserProfile() async {
+  Future<SupabaseUser?> getUserProfile() async {
     try {
       final response = await _supabaseClient
           .from('account')
-          .select()
+          .select<PostgrestMap?>()
           .eq('id', _supabaseClient.auth.currentUser?.id)
-          .single()
-          .execute();
+          .maybeSingle();
 
-      final data = response.data as Map<String, dynamic>;
-      return SupabaseUser.fromJson(data);
+      if (response == null) {
+        return null;
+      }
+      return SupabaseUser.fromJson(response);
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
         SupabaseUserInformationFailure(error),
@@ -71,8 +72,7 @@ class SupabaseDatabaseClient {
 
       await _supabaseClient
           .from('account')
-          .upsert(supabaseUser.toJson())
-          .execute();
+          .upsert(supabaseUser.toJson());
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
         SupabaseUpdateUserFailure(error),

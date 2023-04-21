@@ -27,6 +27,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     try {
       emit(state.copyWith(status: AccountStatus.loading));
       final user = await _userRepository.getUser();
+      if (user == null) {
+        return;
+      }
       emit(
         state.copyWith(
           status: AccountStatus.success,
