@@ -11,7 +11,7 @@ enum CompanyNameValidationError {
 /// {@endtemplate}
 class CompanyName extends FormzInput<String, CompanyNameValidationError> {
   /// {@macro company_name}
-  const CompanyName.pure() : super.pure('');
+  const CompanyName.pure([super.value = '']) : super.pure();
 
   /// {@macro company_name}
   const CompanyName.dirty([super.value = '']) : super.dirty();

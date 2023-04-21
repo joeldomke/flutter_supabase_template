@@ -11,7 +11,7 @@ enum UserNameValidationError {
 /// {@endtemplate}
 class UserName extends FormzInput<String, UserNameValidationError> {
   /// {@macro user_name}
-  const UserName.pure() : super.pure('');
+  const UserName.pure([super.value = '']) : super.pure();
 
   /// {@macro user_name}
   const UserName.dirty([super.value = '']) : super.dirty();

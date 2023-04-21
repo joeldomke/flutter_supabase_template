@@ -28,14 +28,15 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(state.copyWith(status: AccountStatus.loading));
       final user = await _userRepository.getUser();
       if (user == null) {
+        emit(state.copyWith(status: AccountStatus.initial));
         return;
       }
       emit(
         state.copyWith(
           status: AccountStatus.success,
           user: user,
-          userName: UserName.dirty(user.userName),
-          companyName: CompanyName.dirty(user.companyName),
+          userName: UserName.pure(user.userName),
+          companyName: CompanyName.pure(user.companyName),
         ),
       );
     } catch (error) {

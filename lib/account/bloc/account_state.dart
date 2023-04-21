@@ -11,7 +11,7 @@ extension AccountStatusX on AccountStatus {
   bool get isEditing => this == AccountStatus.edit;
 }
 
-class AccountState extends Equatable {
+class AccountState extends Equatable with FormzMixin {
   const AccountState({
     User? user,
     this.valid = false,
@@ -25,6 +25,9 @@ class AccountState extends Equatable {
   final User user;
   final bool valid;
   final AccountStatus status;
+
+  @override
+  List<FormzInput<dynamic, dynamic>> get inputs => [userName, companyName];
 
   @override
   List<Object> get props => [

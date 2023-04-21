@@ -155,7 +155,7 @@ class _UpdateUserButton extends StatelessWidget {
 
     return ElevatedButton(
       key: const Key('accountView_update_button'),
-      onPressed: state.status.isLoading || !state.valid
+      onPressed: state.status.isLoading || state.isPure
           ? null
           : () => context.read<AccountBloc>().add(
                 AccountUserUpdated(
